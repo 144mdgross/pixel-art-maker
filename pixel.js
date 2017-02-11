@@ -61,6 +61,13 @@ reset.innerText = 'reset'
 palateDiv.appendChild(reset)
 console.log('reset', reset)
 
+//add event listener to reset page
+reset.addEventListener("click", function (){
+//reload window from cache instead of server
+  window.location.reload(false);
+})
+
+
 //add eventListener for changing color
 paintDiv.addEventListener("mousedown", function(e){
 //keep the drag from highlighting the whole body
@@ -69,6 +76,7 @@ paintDiv.addEventListener("mousedown", function(e){
   } else {
     //do what i want you to do
     e.target.style.backgroundColor = activeColor['color'];
+    //alter function for dragging mouse
   }
 //define function to share color between what's click on the palate and the grid.
 
