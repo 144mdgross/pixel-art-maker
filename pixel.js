@@ -83,16 +83,25 @@ paintDiv.addEventListener("mousedown", function(e){
 })//click the body change the backgroundColor to red listener
 //create event listener and function to return class of pallette clicked
 var activeColor = {
-  color: 'crimson',
+  color: 'black',
 }
 //function to save palete color. should it be a method?
 
+//create function to highlight activeColor only.
 
+var palateClicks = {
+  count: 0
+}
 
 //put event listener on the pallette..
 palateDiv.addEventListener('click', function(e){
 console.log('clicked on palete')
 //this is working. now how to update the color object when clicking on targets?
+if (e.target) {
+palateClicks['count'] += 1
+}
+console.log('palate clicks ==>', palateClicks['count'])
+e.target.style.boxShadow = "0px 0px 30px blue"
 color = e.target.style.backgroundColor
 
 function chooseColor (color) {
@@ -102,7 +111,7 @@ function chooseColor (color) {
   return activeColor['color']
   console.log(activeColor['color'])
 }
-
+//call the function
 chooseColor(color)
 
 
