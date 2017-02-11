@@ -6,20 +6,23 @@
 
 
 .column {
-  width: 10%;
-  height: 2em;
-  border: 2px solid black;
+  width: 2%;
+  height: 1em;
+  border: .5px solid whitesmoke;
   float: left;
 
 }
 
 .column-2 {
-  width: 30%;
-  height: 5em;
+  width: 4%;
+  height: 2em;
   border: 2px solid black;
   float: left;
 }
 
+/*.shadow {
+  box-shadow: "0px 0px 30px blue";
+}*/
 
 /*clear parent element*/
  .grid:after {
@@ -39,4 +42,8 @@ body {
   height: 10em;
   background-color: #000;
   clear: both;
+}
+
+.canvas {
+  border: 1px solid black
 }
