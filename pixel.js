@@ -72,39 +72,58 @@ reset.addEventListener("click", function (){
 })
 
 
-//add eventListener for changing color
-paintDiv.addEventListener("mousedown", function(e){
-//keep the drag from highlighting the whole body
+var paint = false;
+
+paintDiv.addEventListener('mousedown', function(e){
+  paint = true;
   if (e.target === this) {
     //do nothing
-  } else {
-    //do what i want you to do
-    e.target.style.backgroundColor = activeColor['color'];
-    paintDiv.addEventListener('mouseover', function(e){
-      console.log('mouseover')
-      if (e.target === this) {
-        //do nothing
-      } else {
-      e.target.style.backgroundColor = activeColor['color']
-      paintDiv.addEventListener('mouseup', function(e){
-        if (e.target === this) {
-          //do nothing
-        } else {
-          console.log('mouseup')
-          e.target.style.backgroundColor = 'white'
-          //do nothing
-        }
-
-      })//end of mouseup
-      }
-  })//end of mouseover
-    //alter function for dragging mouse
   }
-//define function to share color between what's click on the palate and the grid.
+})
 
-})//click the body change the backgroundColor to red listener
-//create event listener and function to return class of pallette clicked
+paintDiv.addEventListener('mouseup', function(e){
+  paint = false;
+})
 
+paintDiv.addEventListener('mouseover', function(e){
+  if (e.target === this) {
+    //do nothing
+  } else if (paint === true) {
+    e.target.style.backgroundColor = activeColor['color']
+  } else {
+    //do nothing
+  }
+})
+//add eventListener for changing color
+// paintDiv.addEventListener("mousedown", function(e){
+// //keep the drag from highlighting the whole body
+//
+//   if (e.target === this) {
+//     //do nothing
+//   } else {
+//     //do what i want you to do
+//     e.target.style.backgroundColor = activeColor['color'];
+//     paintDiv.addEventListener('mouseover', function(e){
+//       console.log('mouseover')
+//       if (e.target === this) {
+//         //do nothing
+//       } else {
+//       e.target.style.backgroundColor = activeColor['color']
+//     }
+//
+//   })//end of mouseover
+//     //alter function for dragging mouse
+//   }
+// //define function to share color between what's click on the palate and the grid.
+//
+// })//click the body change the backgroundColor to red listener
+// //create event listener and function to return class of pallette
+//
+//     //e.target.style.backgroundColor = 'white'
+//     //do nothing
+//   //}
+//
+// })//end of mouseup
 
 
 var activeColor = {
@@ -118,19 +137,19 @@ var palateClicks = {
   count: 0
 }
 
-//declare function so I can remove event listener? is that what I want to do to only activate one thing? Can I use a pseudo class instead?
 
+var chosenColor = false;
 //put event listener on the pallette..
-palateDiv.addEventListener('click', function(e){
-console.log('clicked on palete')
-//this is working. now how to update the color object when clicking on targets?
+palateDiv.addEventListener('mousedown', function(e){
 
-palateClicks['count'] += 1
-//how to add and remove box shadow?
-console.log('palate clicks ==>', palateClicks['count'])
-e.target.style.boxShadow = "0px 0px 30px blue"
+var chosenColor = true;
+// palateClicks['count'] += 1
+// //how to add and remove box shadow?
+// console.log('palate clicks ==>', palateClicks['count'])
+
+//e.target.style.boxShadow = "0px 0px 30px blue"
 //e.target.classList.add('shadow')
-console.log(e.target.classList)
+//console.log(e.target.classList)
 color = e.target.style.backgroundColor
 
 function chooseColor (color) {
@@ -145,6 +164,7 @@ chooseColor(color)
 
 
 })//end of palete event listener
+
 
 // gap.addEventListener("click", function(e){
 //   //adding event listener to gap does not add it to the color pallette. Maybe make separate divs for the main sections so i don't have to have the clicked listener on just the body.
