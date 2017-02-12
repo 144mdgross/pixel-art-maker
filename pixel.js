@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", function (event){
 //select the body
 var theBody = document.getElementsByTagName('body')[0]
 console.log(theBody)
+theBody.style.margin = "0% 1% 1% 0%"
+
+// var titleDiv = document.createElement('div')
+// titleDiv.innerHTML= "<h1>Paint</h1>"
+// theBody.appendChild(titleDiv)
+//Do i care about a pixel art title...not really.
 
 var paintDiv = document.createElement('div')
 paintDiv.classList.add('canvas')
@@ -62,7 +68,9 @@ for (var w = 0; w < colorArray.length; w++) {
 var reset = document.createElement('button')
 reset.classList.add('reset-button')
 reset.innerText = 'reset'
-palateDiv.appendChild(reset)
+reset.style.padding = '.75em 4.9%'
+reset.style.backgroundColor = 'LightSlateGrey'
+colorDivRow.appendChild(reset)
 console.log('reset', reset)
 
 //add event listener to reset page
@@ -79,6 +87,11 @@ paintDiv.addEventListener('mousedown', function(e){
   if (e.target === this) {
     //do nothing
   }
+})
+
+//add event listener so that if mouseeneters the palateDiv paint = false.!
+palateDiv.addEventListener('mouseenter', function (e){
+  paint = false;
 })
 
 paintDiv.addEventListener('mouseup', function(e){
