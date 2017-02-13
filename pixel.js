@@ -64,15 +64,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     colorDivRow.appendChild(reset)
     //console.log('reset', reset)
 
-    //add master button
-    // var master = document.createElement('button')
-    // master.classList.add('master-button')
-    // master.innerText = 'master'
-    // master.style.fontSize = '1em'
-    // master.style.padding = '.3em 4.45%'
-    // master.style.backgroundColor = 'transparent'
-    // palateDiv.appendChild(master)
+    //someday..add diferent skill levels of 'art' making.
 
+    var activeColor = {
+        color: 'black',
+        hiddenColor: 'transparent'
+    }
     //add activeColor indicator
     var displayColor = document.createElement('div')
     displayColor.classList.add('displayColor')
@@ -80,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     displayColor.style.height = '2em';
     displayColor.style.border = '3px solid black'
     displayColor.style.display = 'inlineBlock'
+    displayColor.style.backgroundColor = 'black'
     paintDiv.appendChild(displayColor)
     //console.log(displayColor,'displayColor')
 
@@ -130,10 +128,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     }) //end of cursor event listener
     //object to hold active color to draw with
-    var activeColor = {
-        color: 'black',
-        hiddenColor: 'transparent'
-    }
+//this is where activeColor was before moving it.
+
     // var palateClicks = {
     //   count: 0
     // }
