@@ -1,197 +1,173 @@
-//add COMCONTENTLOADED
+//add DOMCONTENTLOADED
+document.addEventListener("DOMContentLoaded", function(event) {
+    //select the body
+    var theBody = document.getElementsByTagName('body')[0]
+    theBody.style.margin = "0% 1% 1% 0%"
+    theBody.style.backgroundImage = 'url(https://www.freecreatives.com/wp-content/uploads/2016/05/Abstract-Canvas-Backgrounds.jpg)'
+    //create parent for canvas
+    //create title
+    var title = document.createElement('h1')
+    title.style.fontSize = '4em'
+    title.innerText = 'pixel art'
+    title.style.fontFamily = 'Barrio, cursive';
+    title.style.textAlign = 'center'
+    title.style.padding = '0em'
+    title.style.margin = '0em'
+    theBody.appendChild(title)
 
-document.addEventListener("DOMContentLoaded", function (event){
+    var paintDiv = document.createElement('div')
+    paintDiv.classList.add('canvas')
+    theBody.appendChild(paintDiv)
+    //create parent for palate
+    var palateDiv = document.createElement('div')
+    palateDiv.classList.add('palate')
+    theBody.appendChild(palateDiv)
 
-//select the body
-var theBody = document.getElementsByTagName('body')[0]
-console.log(theBody)
-theBody.style.margin = "0% 1% 1% 0%"
+    //make div to attach other divs to for the drawing grid
+    for (var j = 0; j < 55; j++) {
+        var theDiv = document.createElement('div')
+        theDiv.classList.add('grid')
+        paintDiv.appendChild(theDiv)
+        //console.log(theDiv)
 
-// var titleDiv = document.createElement('div')
-// titleDiv.innerHTML= "<h1>Paint</h1>"
-// theBody.appendChild(titleDiv)
-//Do i care about a pixel art title...not really.
+        //make columns and attach them to the grid rows
+        for (var i = 0; i < 200; i++) {
+            var theOtherDiv = document.createElement('div')
+            theOtherDiv.classList.add('column')
+            theDiv.appendChild(theOtherDiv)
+        }
+    }
 
-var paintDiv = document.createElement('div')
-paintDiv.classList.add('canvas')
-theBody.appendChild(paintDiv)
+    //create palate rows
+    var colorDivRow = document.createElement('div')
+    colorDivRow.classList.add('grid')
+    palateDiv.appendChild(colorDivRow)
 
-var palateDiv = document.createElement('div')
-palateDiv.classList.add('palate')
-theBody.appendChild(palateDiv)
+    //store colors....this is a lengthy way to do it...
+    var colorArray = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "Darkorange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"]
+    //make color palate with an array
+    for (var w = 0; w < colorArray.length; w++) {
+        var colorDivColumn = document.createElement('div')
+        var styleColor = colorArray[w]
+        colorDivColumn.style.backgroundColor = styleColor
 
-//make div to attach other divs to
-for (var j = 0; j < 20; j++) {
-var theDiv = document.createElement('div')
-theDiv.classList.add('grid')
-paintDiv.appendChild(theDiv)
-console.log(theDiv)
+        colorDivColumn.classList.add('column-2')
+        colorDivRow.appendChild(colorDivColumn)
+    }
+    //add reset button to blank out canvas
+    var reset = document.createElement('button')
+    reset.classList.add('reset-button')
+    reset.innerText = 'reset'
+    reset.style.fontSize = '1em'
+    reset.style.padding = '.3em 4.45%'
+    reset.style.backgroundColor = 'LightSlateGrey'
+    colorDivRow.appendChild(reset)
+    //console.log('reset', reset)
 
-//make other divs and attach them to the grid div
-for(var i = 0; i < 100; i++) {
-  var theOtherDiv = document.createElement('div')
-  theOtherDiv.classList.add('column')
-  theDiv.appendChild(theOtherDiv)
-}
-}
+    //add master button
+    // var master = document.createElement('button')
+    // master.classList.add('master-button')
+    // master.innerText = 'master'
+    // master.style.fontSize = '1em'
+    // master.style.padding = '.3em 4.45%'
+    // master.style.backgroundColor = 'transparent'
+    // palateDiv.appendChild(master)
 
-//create gap to distinguish palate from grid
-// var gap = document.createElement('div')
-// gap.classList.add('gap')
-// theBody.appendChild(gap)
-// console.log('gap', gap)
+    //add activeColor indicator
+    var displayColor = document.createElement('div')
+    displayColor.classList.add('displayColor')
+    displayColor.style.width = '100%'
+    displayColor.style.height = '2em';
+    displayColor.style.border = '3px solid black'
+    displayColor.style.display = 'inlineBlock'
+    paintDiv.appendChild(displayColor)
+    //console.log(displayColor,'displayColor')
 
-//create palate rows
-  var colorDivRow = document.createElement('div')
-  colorDivRow.classList.add('grid')
-  palateDiv.appendChild(colorDivRow)
-//create palate columns
-//now get them to access colors stored in array
-//var colorArray = ['red', 'green', 'purple', 'pink', 'yellow', 'maroon']
-var colorArray = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+    //add event listener to reset page
+    reset.addEventListener("click", function() {
+        //reload window from cache instead of server
+        window.location.reload(false);
+    }) //end of reset event listener
 
+    //variable to control canvas event listeners
+    var paint = false;
+    //add color when clicked
+    paintDiv.addEventListener('mousedown', function(e) {
+        paint = true;
+        if (e.target === this) {
+            //do nothing
+        } else {
+            e.target.style.backgroundColor = activeColor['color']
+        }
+    })
+    //stop the color when you lift the mouse
+    paintDiv.addEventListener('mouseup', function(e) {
+        paint = false;
+    })
+    //drag color, but don't fill the entire grid
+    paintDiv.addEventListener('mouseover', function(e) {
+        if (e.target === this) {
+            //do nothing
+        } else if (paint === true) {
+            e.target.style.backgroundColor = activeColor['color']
+        } else {
+            //do nothing ...
+        }
+    })
 
-//this gives me as many divs as elements in the color array. but the color follows the columns instead of being unique to each square. fix later.
-//make color palate with an array
-for (var w = 0; w < colorArray.length; w++) {
-    var colorDivColumn = document.createElement('div')
-    var styleColor = colorArray[w]
-    colorDivColumn.style.backgroundColor = styleColor
+    //create paint cursor
+    var cursor = false;
+    //add event listener so that if mouseeneters the palateDiv paint = false
+    palateDiv.addEventListener('mouseenter', function(e) {
+        paint = false;
+        cursor = false;
+    }) //end of debugging palate listener
 
-  colorDivColumn.classList.add('column-2')
-  colorDivRow.appendChild(colorDivColumn)
-  }
+    paintDiv.addEventListener('mouseenter', function(e) {
+        cursor = true;
+        if (cursor === true) {
+            e.target.style.cursor = "url(http://www.rw-designer.com/cursor-extern.php?id=22875), cell"
+        }
+    }) //end of cursor event listener
+    //object to hold active color to draw with
+    var activeColor = {
+        color: 'black',
+        hiddenColor: 'transparent'
+    }
+    // var palateClicks = {
+    //   count: 0
+    // }
+    //variable to control behaviour of event listeners master
+    //var chosenColor = false;
+    //put event listener on the pallette..
+    palateDiv.addEventListener('mousedown', function(e) {
+        //var chosenColor = true;
+      if (e.target === this) {
+        //do nothing
+      } else {
+        color = e.target.style.backgroundColor
+        displayColor.style.backgroundColor = color
+        //modify value of object with the selected color
+        function chooseColor(color) {
+            if (color !== activeColor['color']) {
+                activeColor['color'] = color
+            }
+            return activeColor['color']
+        }
+      }
+        chooseColor(color)
+    }) //end of palete event listener
 
-
-
-//add reset button.
-var reset = document.createElement('button')
-reset.classList.add('reset-button')
-reset.innerText = 'reset'
-reset.style.padding = '.75em 4.9%'
-reset.style.backgroundColor = 'LightSlateGrey'
-colorDivRow.appendChild(reset)
-console.log('reset', reset)
-
-//add event listener to reset page
-reset.addEventListener("click", function (){
-//reload window from cache instead of server
-  window.location.reload(false);
-})
-
-
-var paint = false;
-
-paintDiv.addEventListener('mousedown', function(e){
-  paint = true;
-  if (e.target === this) {
-    //do nothing
-  }
-})
-
-//add event listener so that if mouseeneters the palateDiv paint = false.!
-palateDiv.addEventListener('mouseenter', function (e){
-  paint = false;
-})
-
-paintDiv.addEventListener('mouseup', function(e){
-  paint = false;
-})
-
-paintDiv.addEventListener('mouseover', function(e){
-  if (e.target === this) {
-    //do nothing
-  } else if (paint === true) {
-    e.target.style.backgroundColor = activeColor['color']
-  } else {
-    //do nothing
-  }
-})
-//add eventListener for changing color
-// paintDiv.addEventListener("mousedown", function(e){
-// //keep the drag from highlighting the whole body
-//
-//   if (e.target === this) {
-//     //do nothing
-//   } else {
-//     //do what i want you to do
-//     e.target.style.backgroundColor = activeColor['color'];
-//     paintDiv.addEventListener('mouseover', function(e){
-//       console.log('mouseover')
-//       if (e.target === this) {
-//         //do nothing
-//       } else {
-//       e.target.style.backgroundColor = activeColor['color']
-//     }
-//
-//   })//end of mouseover
-//     //alter function for dragging mouse
-//   }
-// //define function to share color between what's click on the palate and the grid.
-//
-// })//click the body change the backgroundColor to red listener
-// //create event listener and function to return class of pallette
-//
-//     //e.target.style.backgroundColor = 'white'
-//     //do nothing
-//   //}
-//
-// })//end of mouseup
-
-
-var activeColor = {
-  color: 'black',
-}
-//function to save palete color. should it be a method?
-
-//create function to highlight activeColor only.
-
-var palateClicks = {
-  count: 0
-}
-
-
-var chosenColor = false;
-//put event listener on the pallette..
-palateDiv.addEventListener('mousedown', function(e){
-
-var chosenColor = true;
-// palateClicks['count'] += 1
-// //how to add and remove box shadow?
-// console.log('palate clicks ==>', palateClicks['count'])
-
-//e.target.style.boxShadow = "0px 0px 30px blue"
-//e.target.classList.add('shadow')
-//console.log(e.target.classList)
-color = e.target.style.backgroundColor
-
-function chooseColor (color) {
-  if (color !== activeColor['color']) {
-      activeColor['color'] = color
-  }
-  return activeColor['color']
-  console.log(activeColor['color'])
-}
-//call the function
-chooseColor(color)
+    // master.addEventListener('click', function (e){
+    //   theBody.classList.add('image')
+    //   paintDiv.classList.add('hidden')
+      //need to add event listener to change background of canvas to inherit no matter what is clicked.
+      // paintDiv.style.backgroundImage = 'url("www.bc.edu/bc_org/avp/cas/his/CoreArt/art/resourcesb/dav_marat.jpg")'
+    //})//end of master event listener
 
 
-})//end of palete event listener
+    console.log(theBody)
+}) //DOMContentLoaded event listener end
 
 
-// gap.addEventListener("click", function(e){
-//   //adding event listener to gap does not add it to the color pallette. Maybe make separate divs for the main sections so i don't have to have the clicked listener on just the body.
-//   e.target.style.backgroundColor = "yellow"
-//   console.log('clicked grid @ ' + e)
-// }) //click color pallette listener end
-
-//add reset event listener
-reset.addEventListener('click', function (e){
-
-
-})//end of reset even listener
-
-
-console.log(theBody)
-
-})//DOMContentLoaded event listener end
+//ideas to return to/improve on la
